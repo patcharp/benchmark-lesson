@@ -1,0 +1,44 @@
+x-default-config: &default-config
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+
+services:
+  fiber:
+    build:
+      context: go-fiber
+      dockerfile: ../Dockerfile.golang
+    <<: *default-config
+    profiles:
+      - go-fiber
+
+  gin:
+    build:
+      context: go-gin
+      dockerfile: ../Dockerfile.golang
+    <<: *default-config
+    profiles:
+      - go-gin
+
+  echo:
+    build:
+      context: go-echo
+      dockerfile: ../Dockerfile.golang
+    <<: *default-config
+    profiles:
+      - go-echo
+
+  elysia:
+    build:
+      context: elysiajs
+    <<: *default-config
+    profiles:
+      - elysia
+
+  express:
+    build:
+      context: expressjs
+    <<: *default-config
+    profiles:
+      - express
+
